@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
+		
+		<!-- 1 IOC注解实例化 -->
+		<context:component-scan base-package="com.ly"></context:component-scan>
+		
+		<!-- 2 MVC注解开启  -->
+		<mvc:annotation-driven></mvc:annotation-driven>
+		
+		<!-- 3 创建resource资源文件 并配置拦截情况
+		 mapping:/* 拦截-/resource/X;/** 拦截-/resource/X/X/X/X/... -->
+		<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
+		
+		<!--4 创建视图解析器对象 并设置返回路由  -->
+		<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/"></property>
+		<property name="suffix" value=".jsp"></property>
+		</bean>
+		
+		<!--5 全局异常  -->
+		<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+			<property name="exceptionMappings">
+				<props>
+					<prop key="com.ly.util.UserException">UserJsp/Globalexception</prop>
+					<!-- 里面是跳转到的jsp名字 -->
+				</props>
+			</property>
+		</bean>
+		
+		<!--6 文件上传  -->
+		<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		
+			<!-- 指定文件大小 -->
+			<property name="maxUploadSize" value="50000"></property>
+		</bean>
+</beans>

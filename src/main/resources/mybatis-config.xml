@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!--1 设置别名 -->
+	<typeAliases>
+
+		<!-- 自动为包内设置别名,名字为 ：首字母大写/小写的类名 -->
+		<package name="com.model" />
+
+	</typeAliases>
+
+	<!--2 设置映射集 -->
+	<mappers>
+		<mapper resource="com/mapper/User.xml" />
+	</mappers>
+
+</configuration>
